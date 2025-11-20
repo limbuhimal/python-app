@@ -18,8 +18,13 @@ jobs:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
+        name: set commit id
+        shell: bash
+        run: |
+          echo "COMMIT_ID=$($GITHUB_SHA::6)" >> "$GITHUB_ENV"
+      -
         name: Build and push
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: limbuhimal/python-app:${{ github.sha }}
+          tags: limbuhimal/python-app:${{ env.COMMIT_ID }}
