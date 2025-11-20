@@ -1,0 +1,49 @@
+# RESOURCE SCALING (Only one replica for local dev)
+redis-ha:
+  enabled: false
+controller:
+  replicas: 1
+applicationSet:
+  replicas: 1
+
+# GLOBAL SETTINGS
+global:
+  domain: argocd.test.com
+  # certificate: enabled: false/removed to avoid conflict with --insecure
+
+# ARGO CD SERVER CONFIGURATION (Access via UI)
+server:
+  replicas: 1
+  extraArgs:
+    - --insecure # Forces HTTP mode to avoid certificate errors on local access
+  
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    # Remove TLS annotations if using --insecure
+
+# REPO SERVER CONFIGURATION (The failing component)
+repoServer:
+  replicas: 1
+
+  healthcheck:
+    fullCheckEnabled: false
+  
+  # Override the probes to be simple
+  livenessProbe:
+    httpGet:
+      path: /healthz
+      port: 8084
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 5 # Good practice to add this too
+
+  readinessProbe:
+    httpGet:
+      path: /healthz
+      port: 8084
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 5 # Good practice to add this too

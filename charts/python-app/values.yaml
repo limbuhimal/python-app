@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: limbuhimal/python-app
   pullPolicy: IfNotPresent
-  tag: "v2"
+  tag: "v3"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -32,6 +32,7 @@ securityContext: {}
 service:
   type: ClusterIP
   port: 5000
+  targetPort: 5000
 
 httpRoute:
   enabled: false
@@ -56,12 +57,12 @@ resources: {}
 
 livenessProbe:
   httpGet:
-    path: /
-    port: http
+    path: /api/v1/healthz
+    port: 5000
 readinessProbe:
   httpGet:
-    path: /
-    port: http
+    path: /api/v1/healthz
+    port: 5000
 
 autoscaling:
   enabled: false
