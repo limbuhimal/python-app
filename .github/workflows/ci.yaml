@@ -21,7 +21,7 @@ jobs:
         name: set commit id
         shell: bash
         run: |
-          echo "COMMIT_ID=$($GITHUB_SHA::6)" >> "$GITHUB_ENV"
+          echo "COMMIT_ID=${GITHUB_SHA::6}" >> "$GITHUB_ENV"
       -
         name: Build and push
         uses: docker/build-push-action@v6
