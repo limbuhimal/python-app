@@ -40,10 +40,10 @@ jobs:
           chmod +x argocd
           sudo mv ./argocd /usr/local/bin/argocd
       -
-        name: ArgoCD app sync
+        name: ArgoCD Login
         shell: bash
         run: |
-          argocd login argocd-server.argocd \
+          argocd login http://argocd-server.argocd \
           --insecure \
           --grpc-web \
           --username admin \
