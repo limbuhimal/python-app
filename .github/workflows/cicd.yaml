@@ -47,7 +47,7 @@ jobs:
           --insecure \
           --grpc-web \
           --username admin \
-          --password $${{ secrets.ARGOCD_PW }}
+          --password ${{ secrets.ARGOCD_PW }}
       -
         name: Sync Application
         shell: bash
