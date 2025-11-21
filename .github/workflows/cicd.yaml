@@ -8,8 +8,8 @@ on:
       - main
 
 jobs:
-  docker:
-    runs-on: self-hosted
+  ci:
+    runs-on: ubuntu-latest
     steps:
       -
         name: Login to Docker Hub
@@ -28,3 +28,23 @@ jobs:
         with:
           push: true
           tags: limbuhimal/python-app:${{ env.COMMIT_ID }}
+
+  cd:
+    runs-on: self-hosted
+    needs: ci
+    steps:
+      -
+        name: ArgoCD app sync
+        shell: bash
+        run: |
+          argocd login argocd-server.argocd \
+          --insecure \
+          --grpc-web \
+          --username admin \
+          --password $${{ secrets.ARGOCD_PW }}
+      -
+        name: Sync Application
+        shell: bash
+        run: |
+          argocd app sync python-app
+      
