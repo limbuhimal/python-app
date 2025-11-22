@@ -43,7 +43,7 @@ jobs:
         name: ArgoCD Login
         shell: bash
         run: |
-          argocd login **argocd-server.argocd:8080** \
+          argocd login **argocd-server.argocd:443** \
           --insecure \
           --grpc-web \
           --username admin \
