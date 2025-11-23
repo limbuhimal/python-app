@@ -43,9 +43,8 @@ jobs:
         name: ArgoCD Login
         shell: bash
         run: |
-          argocd login 10.96.194.110:8080 \
+          argocd login 10.96.194.110:80 \
           --insecure \
-          --grpc-web \
           --username admin \
           --password ${{ secrets.ARGOCD_PW }}
       -
