@@ -42,7 +42,7 @@ jobs:
       - name: Argo CD Login
         shell: bash
         run: |
-          argocd login argocd-server.argocd.svc.cluster.local:80 \
+          argocd login http://argocd-server.argocd.svc.cluster.local:80 \
           --username admin \
           --insecure \
           --grpc-web \
