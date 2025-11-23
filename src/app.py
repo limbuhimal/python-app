@@ -13,7 +13,7 @@ def details():
     return jsonify({
         'time' : datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y"),
         'hostname'  : socket.gethostname()
-        'message' : 'Hello, This is from Github Actions but running in self hosted runner!!!!'
+        'message' : 'Hello, This is from Github Actions but running in self hosted runner!!!!!'
     })
 
 @app.route('/api/v1/healthz')
