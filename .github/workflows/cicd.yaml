@@ -39,13 +39,16 @@ jobs:
           curl -ksSL -o argocd argocd-server.argocd/download/argocd-linux-amd64
           chmod +x argocd
           sudo mv ./argocd /usr/local/bin/argocd
-      -
-        name: ArgoCD Login
-        shell: bash
+      - name: Argo CD Login via Port-Forward (Recommended)
         run: |
-          argocd login 10.96.194.110:80 \
+          kubectl port-forward svc/argocd-server -n argocd 8080:80 > /dev/null 2>&1 &
+    
+          PORT_FORWARD_PID=$!
+    
+          sleep 5
+    
+          argocd login **localhost:8080** \
           --insecure \
-          --grpc-web \
           --username admin \
           --password ${{ secrets.ARGOCD_PW }}
       -
