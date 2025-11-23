@@ -47,10 +47,12 @@ jobs:
     
           sleep 5
     
-          argocd login **10.96.194.110:8080** \
-          --insecure \
-          --username admin \
-          --password ${{ secrets.ARGOCD_PW }}
+          argocd login **localhost:8080** \
+           --insecure \
+           --username admin \
+           --password ${{ secrets.ARGOCD_PW }}
+
+          kill $PORT_FORWARD_PID
       -
         name: Sync Application
         shell: bash
