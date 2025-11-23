@@ -47,7 +47,7 @@ jobs:
     
           sleep 5
     
-          argocd login **localhost:8080** \
+          argocd login **10.96.194.110:8080** \
           --insecure \
           --username admin \
           --password ${{ secrets.ARGOCD_PW }}
