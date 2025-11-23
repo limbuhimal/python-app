@@ -45,6 +45,7 @@ jobs:
           argocd login argocd-server.argocd.svc.cluster.local:80 \
           --username admin \
           --insecure \
+          --grpc-web \
           --password ${{ secrets.ARGOCD_PW }}
       -
         name: Sync Application
