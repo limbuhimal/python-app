@@ -2,7 +2,7 @@ replicaCount: 1
 image:
   repository: limbuhimal/python-app
   pullPolicy: IfNotPresent
-  tag: "0516cb"
+  tag: "fce2b7"
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
